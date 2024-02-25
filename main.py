@@ -22,8 +22,13 @@ class Person(OurBaseModel):
 # Creating a database session
 db = SessionLocal()
 
+#Endpoint for the home page
+@app.get("/",status_code=status.HTTP_200_OK)
+def greeting():
+    return "Welcome to our app go to /docs for more information"
+
 # Endpoint to get all persons
-@app.get('/', response_model=list[Person], status_code=status.HTTP_200_OK)
+@app.get('/getallusers', response_model=list[Person], status_code=status.HTTP_200_OK)
 def getAllPersons():
     getAllPersons = db.query(models.Person).all()
     return getAllPersons
